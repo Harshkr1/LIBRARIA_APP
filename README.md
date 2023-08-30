@@ -1,6 +1,6 @@
-# LIBRARIA
-# BMSCE College Library System
 
+# BMSCE College Library System
+# LIBRARIA
 Welcome to the BMSCE College Library System project. This web application streamlines the library management process for BMSCE College of Engineering.
 
 ## Features
