@@ -2,7 +2,7 @@
 
 //importing mongo db
 const mongoose = require("mongoose");
-
+const passportLocalMongoose = require('passport-local-mongoose');
 const StudentSchema=new mongoose.Schema({
     username:{
         type:String,
@@ -21,7 +21,7 @@ const StudentSchema=new mongoose.Schema({
 //Now we need to create a collection
 
 //creating a new class for that
-
+StudentSchema.plugin(passportLocalMongoose);
 //Student database ke andr ye collection hai jismei data saved Rahegi humari 
 const Register= new mongoose.model("Register",StudentSchema);
 

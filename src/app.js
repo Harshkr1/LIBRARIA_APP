@@ -4,8 +4,21 @@ const path = require("path");
 const app= express();
 const hbs= require("hbs");
 const Register=require("./models/register")
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const session = require("express-session");
+require("./passport-config"); 
 require("./db/conn");
 const port = process.env.PORT || 3000;
+const secretKey = process.env.SECRET_KEY;
+
+// Middleware to check if the user is authenticated
+
+
+
+
+
+
 //now to tell express JS that we need to use the folder that we have created
 //express mein static file create kia hua hai humne 
 const static_path=path.join(__dirname,"../public")
@@ -13,6 +26,29 @@ const template_path=path.join(__dirname,"../template/views")
 const partials_path=path.join(__dirname,"../template/partials")
 
 app.use(express.json()); 
+
+passport.use(new LocalStrategy(Register.authenticate()));
+passport.serializeUser(Register.serializeUser());
+passport.deserializeUser(Register.deserializeUser());
+
+app.use(session({
+    secret: "secretKey",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next(); // If authenticated, proceed to the next middleware/route
+    }
+    // If not authenticated, redirect to the login page
+    res.redirect('/login');
+  }
+
+
 
 
 //to render images
@@ -26,6 +62,14 @@ app.use(express.urlencoded({extended:false}))
 
 app.use(express.static(static_path))
 
+
+
+  
+
+
+
+
+
 //now we are setting the view engine here 
 //which we will use to create the landing page here
 //this sets that .hbs wali  page will be our landing page 
@@ -36,9 +80,76 @@ app.get("/",(req, res) =>{
     res.render("login")
 })
 
+
+// ... (previous code)
+
+// Protected Routes with isAuthenticated middleware
+
+  
+  app.get("/index", isAuthenticated, (req, res) => {
+    res.render("index");
+  });
+  
+//   app.get("/books", isAuthenticated, (req, res) => {
+//     res.render("books");
+//   });
+  
+//   app.get("/contact", isAuthenticated, (req, res) => {
+//     res.render("contact");
+//   });
+  
+//   app.get("/createblog", isAuthenticated, (req, res) => {
+//     res.render("createblog");
+//   });
+  
+//   app.get("/news", isAuthenticated, (req, res) => {
+//     res.render("news");
+//   });
+  
+//   app.get("/register", isAuthenticated, (req, res) => {
+//     res.render("register");
+//   });
+  
+//   app.get("/services", isAuthenticated, (req, res) => {
+//     res.render("services");
+//   });
+  
+//   app.get("/viewblog", isAuthenticated, (req, res) => {
+//     res.render("viewblog");
+//   });
+  
+  // ... (other routes)
+  
+  // ... (server setup)
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/register",(req,res)=>{
     res.render("register");
 })
+
+
+
+
 
 //now we need to make this same register method as post method here 
 app.post("/register", async (req,res)=>{

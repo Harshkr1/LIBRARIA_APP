@@ -129,6 +129,10 @@ h1 {
   width: 150%;
   height: auto;
 }
+.logo3{
+  width: 100%;
+  height: auto;
+}
 .svgarrow{
   width: 5%;
   height: auto;
@@ -1365,6 +1369,8 @@ p {
   .lead {
     font-size: 21px;
   }
+
+
 }
 small,
 .small {
@@ -1655,7 +1661,12 @@ pre code {
   .container {
     width: 750px;
   }
+  
 }
+
+
+
+
 @media (min-width: 992px) {
   .container {
     width: 970px;

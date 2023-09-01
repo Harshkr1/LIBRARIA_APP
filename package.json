@@ -6,16 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "dev":"nodemon src/app.js -e js,hbs",
+    "dev": "nodemon src/app.js -e js,hbs",
     "build": "echo 'No build step needed'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "hbs": "^4.2.0",
-    "mongoose": "^7.3.3"
+    "mongoose": "^7.3.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
