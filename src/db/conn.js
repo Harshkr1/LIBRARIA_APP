@@ -4,7 +4,7 @@ const DB='mongodb+srv://harshkr70:harshkumar@cluster0.k9bhhix.mongodb.net/librar
 
 mongoose.connect(DB).then(()=>{
     //if connection successfull then ye wali code
-    console.log(`Connection Successfull`);
+    console.log(`Connection to REGSITER Successfull`);
 }).catch((e)=>{
     //to catch any error in connection here 
     console.log(e.message);
